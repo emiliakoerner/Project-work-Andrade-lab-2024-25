@@ -1,3 +1,4 @@
+# This workflow processes proteomic data, integrates external annotations, and augments it with polyx region analysis for further research.
 # set working directory, imports
 import os
 os.chdir("C:/users/wrede/desktop/masterarbeit")
