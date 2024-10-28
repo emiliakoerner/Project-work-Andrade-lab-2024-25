@@ -165,4 +165,4 @@ with open(mapped_hk,'r') as input, open(outputfile,'w') as output:
             else:
                 output.write(f"{gene_id}\t{transcript_id}\t{uniprot_id}\t{length}\t{housekeeping}\t{polyx_count}\t{polyx_types_combined}\t{total_length}\t{aa_percent}\t>1\n")
         else:   # If protein has no polyx region, put 0 or - instead for poly x count, type and length
-            output.write(f"{gene_id}\t{transcript_id}\t{uniprot_id}\t{length}\t{housekeeping}\t0\t-\t0\t0\n")
+            output.write(f"{gene_id}\t{transcript_id}\t{uniprot_id}\t{length}\t{housekeeping}\t0\t-\t0\t0\t0\n")
