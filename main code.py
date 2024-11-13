@@ -1,7 +1,7 @@
 # set working directory, imports
 import os
 from collections import defaultdict
-os.chdir("C:/Users/wrede/OneDrive - JGU/Desktop/Masterarbeit/python2.0")
+os.chdir("C:/Users/wrede/OneDrive - JGU/Desktop/Masterarbeit/main2.0")
 
 referenceproteome = 'reference_proteome.fasta'  # reference proteome of 20.000 proteins
 mappingfile = 'mapping_file.txt'        # mapping file with IDs (Transcript ID, Gene ID, UniProt ID)
@@ -41,18 +41,19 @@ with open(mappingfile, 'r') as map:
 # Proteins with no entry in the mapping file are lost here
 with open(mapped, 'w') as mapped:
     mapped.write(f"Gene ID\tUniProtID\tProtein length\n")  # Write header
-    matched_uniprot_ids = set()
     unmapped_proteins = 0
-    for gene_id, data in mapdict.items():       # Iterate through each gene id in the mapping dictionary
-        gene_id = data["gene_id"]
-        for uniprot_id, proteindata in proteomedict.items(): # Then iterate through proteome dictionary
+    matched_uniprot_ids = set()
+    for uniprot_id, proteindata in proteomedict.items():  # Iterate through each dictionary entry aka protein in the proteome
+        sequence = proteindata["sequence"]  # Variables for Sequence and Length
+        length = len(sequence)
+        for gene_id, data in mapdict.items():       # Iterate through each gene id in the mapping dictionary
             if uniprot_id in data["uniprot_id"]:    # If uniprot id is in mapping dictionary
-                sequence = proteindata["sequence"]  # Variables for sequence and length
-                length = len(sequence)
+                gene_id = data["gene_id"]
                 mapped.write(f"{gene_id}\t{uniprot_id}\t{length}\n")   # IDs and length are copied in output file
                 matched_uniprot_ids.add(uniprot_id)
                 break
-    for uniprot_id, proteindata in proteomedict.items():            # Unmapped proteins are added at the end of the list
+        # Unmapped proteins are added at the end of the list
+    for uniprot_id, proteindata in proteomedict.items():
         if uniprot_id not in matched_uniprot_ids:
             sequence = proteindata["sequence"]
             length = len(sequence)
