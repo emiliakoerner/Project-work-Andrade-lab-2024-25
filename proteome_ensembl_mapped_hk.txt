@@ -1,4 +1,4 @@
-Gene ID	Gene name	Protein length	hk
+gene_id	gene_name	length	hk
 ENSG00000282815	TEX13C	993	0
 ENSG00000284491	THSD8	115	0
 ENSG00000149021	CGB1	187	0
